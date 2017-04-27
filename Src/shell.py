@@ -54,7 +54,8 @@ def typekeys(string):
         CLIENT.keyPress(k)
 
 @main.command()
-def imagetext():
+@click.option('--image', help='image to process')
+def imagetext(image):
     """
     Echo the text processed out of an image.
     Needs the application tesseract-ocr installed.
@@ -62,7 +63,7 @@ def imagetext():
 
     """
     cap = CaptureUtil()
-    click.echo(cap.get_string())
+    click.echo(cap.get_string(image))
 
 @main.command()
 def pressenter():
