@@ -78,6 +78,18 @@ def mouseclick(x, y):
     sleep(1)
     CLIENT.mousePress()
 
+
+@main.command()
+@click.option('--x', help='X coordinate of the screen')
+@click.option('--y', help='Y coordinate of the screen')
+def mousemove(x, y):
+    """
+    Move to a given coordinate of the screen.
+
+    """
+    CLIENT.mouseMove(x, y)
+
+
 @main.command()
 def pressenter():
     """
