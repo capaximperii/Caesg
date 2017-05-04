@@ -9,7 +9,7 @@ Provides an interactive shell for vnc connection automation.
   help
   connect --host=10.10.10.10 --display=1 --password=xyz
   typekeys --string=ls
-  screeshot
+  screenshot
   exit
 ```
 
