@@ -7,6 +7,7 @@ import sys
 import click
 import StringIO
 import click_shell
+from time import sleep
 from vncdotool import api
 from screen import CaptureUtil
 
@@ -66,6 +67,18 @@ def imagetext(image):
     click.echo(cap.get_string(image))
 
 @main.command()
+@click.option('--x', help='X coordinate of the screen')
+@click.option('--y', help='Y coordinate of the screen')
+def mouseclick(x, y):
+    """
+    Click a given coordinate of the screen.
+
+    """
+    CLIENT.mouseMove(x, y)
+    sleep(1)
+    CLIENT.mousePress()
+
+@main.command()
 def pressenter():
     """
     clears the screen
@@ -80,6 +93,16 @@ def clear():
 
     """
     click.clear()
+
+@main.command()
+def disconnect():
+    """
+    clears the screen
+
+    """
+    CLIENT.disconnect()
+
+
 
 if __name__ == '__main__':
     # Extra argument is assumed to be a script file to run.
