@@ -23,7 +23,13 @@ class CaptureUtil:
         Return all strings in an image as a string.
 
         """
-        img = cv2.imread(img_path)
+        basewidth = 6400
+        img = Image.open(img_path)
+        wpercent = (basewidth/float(img.size[0]))
+        hsize = int((float(img.size[1])*float(wpercent)))
+        img = img.resize((basewidth, hsize), Image.ANTIALIAS)
+        img.save(os.path.join(self.path, 'zoomed.jpg'))
+        img = cv2.imread(os.path.join(self.path, 'zoomed.jpg'))
         img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         kernel = np.ones((1, 1), np.uint8)
         img = cv2.dilate(img, kernel, iterations=1)
@@ -34,3 +40,6 @@ class CaptureUtil:
         cv2.imwrite(os.path.join(self.path, "thres.png"), img)
         result = pytesseract.image_to_string(Image.open(os.path.join(self.path, "thres.png")))
         return result
+
+
+
