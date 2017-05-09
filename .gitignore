@@ -5,7 +5,11 @@
 /pip-selfcheck.json
 /Scripts/
 /tcl/
-
+bin/
+include/
+lib/
+local/
+.vscode/
 *.pyc
 __pycache__
 .idea/
