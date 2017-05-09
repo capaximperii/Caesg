@@ -5,10 +5,10 @@ Command line shell for VNC automation interface.
 import os
 import sys
 import click
-import StringIO
 import click_shell
 from time import sleep
 from vncdotool import api
+from spell import SpellUtil
 from screen import CaptureUtil
 
 CLIENT = None
@@ -56,7 +56,8 @@ def typekeys(string):
 
 @main.command()
 @click.option('--image', help='image to process')
-def imagetext(image):
+@click.option('--spell/--no-spell', default=False)
+def imagetext(image, spell):
     """
     Echo the text processed out of an image.
     Needs the application tesseract-ocr installed.
@@ -64,7 +65,11 @@ def imagetext(image):
 
     """
     cap = CaptureUtil()
-    click.echo(cap.get_string(image))
+    txt = cap.get_string(image).split(' ')
+    if spell == True:
+        for i, word in enumerate(txt):
+            txt[i] = SpellUtil.correction(word)
+    click.echo(' '.join(txt))
 
 @main.command()
 @click.option('--x', help='X coordinate of the screen')

@@ -23,7 +23,8 @@ class CaptureUtil:
         Return all strings in an image as a string.
 
         """
-        basewidth = 3096
+        basewidth = 6400 # works better on linux
+        # basewidth = 3096 # works better on windows
         img = Image.open(img_path)
         wpercent = (basewidth/float(img.size[0]))
         hsize = int((float(img.size[1])*float(wpercent)))
